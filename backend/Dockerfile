@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
 # Install dependencies
 RUN apk --no-cache add git postgresql-dev build-base linux-headers libffi libffi-dev ruby ruby-dev ruby-bundler ruby-irb zlib zlib-dev tzdata
