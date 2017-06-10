@@ -1,0 +1,8 @@
+{
+    "production": false,
+    "backend_type": "oskiosk",
+    "backend_config": {
+        "url": "/api",
+        "token": "e956ef2249d6b399fc7f044186879b532f8a5335b3acbcb91ff32af156568e7b"
+    }
+}

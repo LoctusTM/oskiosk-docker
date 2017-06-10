@@ -1,0 +1,42 @@
+version: '3'
+
+volumes:
+  psql-data:
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - POSTGRESQL_USERNAME=kiosk
+      - POSTGRESQL_PASSWORD=kiosk
+      - POSTGRESQL_DATABASE=kiosk
+    volumes:
+      - psql-data:/bitnami/postgresql
+
+  backend:
+    build: backend
+    image: 'oskiosk/backend'
+    depends_on:
+      - postgresql
+    links:
+      - postgresql:postgresql
+    environment:
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=ooyee2oophe6shae9Gohy9ahhooSeiHe5iemaeque7Ughegh4kaiXe1yohgePaQu
+      - POSTGRESQL_HOST=postgresql
+      - POSTGRESQL_USERNAME=kiosk
+      - POSTGRESQL_PASSWORD=kiosk
+      - POSTGRESQL_DATABASE=kiosk
+
+  frontend:
+    build: frontend
+    image: 'oskiosk/frontend'
+    depends_on:
+      - backend
+    links:
+      - backend:backend
+    volumes:
+      - ./frontend/htpasswd:/oskiosk-client/htpasswd
+      - ./frontend/auth:/oskiosk-client/dist/_auth
+    ports:
+      - 8000:8000
