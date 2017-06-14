@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 # Version of the Oskiosk client to Install
-ENV client_version 1.0.6
+ENV client_version 1.0.7
 
 # Install dependencies
 RUN apk --no-cache add nginx ca-certificates wget
